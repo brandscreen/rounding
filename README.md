@@ -1,9 +1,9 @@
-scheduling
-==========
+rounding
+========
 
-[![Build Status](https://travis-ci.org/brandscreen/scheduling.png)](https://travis-ci.org/brandscreen/scheduling) [![Coverage Status](https://coveralls.io/repos/brandscreen/scheduling/badge.png?branch=HEAD)](https://coveralls.io/r/brandscreen/scheduling?branch=HEAD)
+[![Build Status](https://travis-ci.org/brandscreen/rounding.png)](https://travis-ci.org/brandscreen/rounding) [![Coverage Status](https://coveralls.io/repos/brandscreen/rounding/badge.png?branch=HEAD)](https://coveralls.io/r/brandscreen/rounding?branch=HEAD)
 
-Scheduling algorithms in [Go](http://golang.org) language.
+Rounding algorithms in [Go](http://golang.org) language.
 
 # Requirements
 
@@ -12,22 +12,22 @@ Scheduling algorithms in [Go](http://golang.org) language.
 # Installation
 
 ```bash
-$ go get github.com/brandscreen/scheduling
+$ go get github.com/brandscreen/rounding
 ```
 
 # Usage
 
 ## Import Scheduling
 
-Ensure you have imported the scheduling package at the top of your source file.
+Ensure you have imported the rounding package at the top of your source file.
 
 ```golang
-import "github.com/brandscreen/scheduling"
+import "github.com/brandscreen/rounding"
 ```
 
 # Contributing
 
-Please see [CONTRIBUTING.md](https://github.com/brandscreen/scheduling/blob/master/CONTRIBUTING.md).  If you have a bugfix or new feature that you would like to contribute, please find or open an issue about it first.
+Please see [CONTRIBUTING.md](https://github.com/brandscreen/rounding/blob/master/CONTRIBUTING.md).  If you have a bugfix or new feature that you would like to contribute, please find or open an issue about it first.
 
 # License
 
