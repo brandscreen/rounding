@@ -1,0 +1,14 @@
+language: go
+
+go:
+- 1.1
+
+install:
+- go get github.com/axw/gocov/gocov
+- go get github.com/mattn/goveralls
+
+script: ../../../../bin/goveralls $GOVERALLS
+
+env:
+  global:
+    secure: Fc1MwBK3lDJr4wD2keT8YBMNfZ2D435YiA8KnAEhDJ97OUWc4NO/DCVFoBA4qvZv4KsNGV9rih9sMVnxmJFzbCD5maA09ARzTcW0I9bvGvuvoW68mIj7qvPuC8aOFjVRaR84gIpwfuOnOzVVw8vgBftmD5cBOIiAtXhlDlwpyME=
