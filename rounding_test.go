@@ -1,8 +1,41 @@
 package rounding
 
+/*
+Copyright (c) 2013 Brandscreen Pty Ltd
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of
+this software and associated documentation files (the "Software"), to deal in
+the Software without restriction, including without limitation the rights to
+use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
+the Software, and to permit persons to whom the Software is furnished to do so,
+subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
+FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
+COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
+IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
+CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+*/
+
 import (
 	"testing"
 )
+
+type MockRandomGenerator struct {
+	Next float64
+}
+
+func (m MockRandomGenerator) Float64() float64 {
+	return m.Next
+}
+
+func NewMockRandomGenerator() *MockRandomGenerator {
+	return &MockRandomGenerator{}
+}
 
 func runTests(t *testing.T, unit Rounder, tests [][]float64) {
 	for _, test := range tests {
@@ -14,7 +47,7 @@ func runTests(t *testing.T, unit Rounder, tests [][]float64) {
 }
 
 func TestRoundDown(t *testing.T) {
-	runTests(t, NewDown(), [][]float64{
+	runTests(t, NewDownRounder(), [][]float64{
 		{0.0, 0.0},
 		{1.0, 1.0},
 		{-1.0, -1.0},
@@ -44,7 +77,7 @@ func TestRoundDown(t *testing.T) {
 }
 
 func TestRoundSymmetricDown(t *testing.T) {
-	runTests(t, NewSymmetricDown(), [][]float64{
+	runTests(t, NewSymmetricDownRounder(), [][]float64{
 		{0.0, 0.0},
 		{1.0, 1.0},
 		{-1.0, -1.0},
@@ -74,7 +107,7 @@ func TestRoundSymmetricDown(t *testing.T) {
 }
 
 func TestRoundUp(t *testing.T) {
-	runTests(t, NewUp(), [][]float64{
+	runTests(t, NewUpRounder(), [][]float64{
 		{0.0, 0.0},
 		{1.0, 1.0},
 		{-1.0, -1.0},
@@ -104,7 +137,7 @@ func TestRoundUp(t *testing.T) {
 }
 
 func TestRoundSymmetricUp(t *testing.T) {
-	runTests(t, NewSymmetricUp(), [][]float64{
+	runTests(t, NewSymmetricUpRounder(), [][]float64{
 		{0.0, 0.0},
 		{1.0, 1.0},
 		{-1.0, -1.0},
@@ -134,7 +167,7 @@ func TestRoundSymmetricUp(t *testing.T) {
 }
 
 func TestRoundHalfUp(t *testing.T) {
-	runTests(t, NewHalfUp(), [][]float64{
+	runTests(t, NewHalfUpRounder(), [][]float64{
 		{0.0, 0.0},
 		{1.0, 1.0},
 		{-1.0, -1.0},
@@ -164,7 +197,7 @@ func TestRoundHalfUp(t *testing.T) {
 }
 
 func TestRoundSymmetricHalfUp(t *testing.T) {
-	runTests(t, NewSymmetricHalfUp(), [][]float64{
+	runTests(t, NewSymmetricHalfUpRounder(), [][]float64{
 		{0.0, 0.0},
 		{1.0, 1.0},
 		{-1.0, -1.0},
@@ -194,7 +227,7 @@ func TestRoundSymmetricHalfUp(t *testing.T) {
 }
 
 func TestRoundHalfDown(t *testing.T) {
-	runTests(t, NewHalfDown(), [][]float64{
+	runTests(t, NewHalfDownRounder(), [][]float64{
 		{0.0, 0.0},
 		{1.0, 1.0},
 		{-1.0, -1.0},
@@ -224,7 +257,7 @@ func TestRoundHalfDown(t *testing.T) {
 }
 
 func TestRoundSymmetricHalfDown(t *testing.T) {
-	runTests(t, NewSymmetricHalfDown(), [][]float64{
+	runTests(t, NewSymmetricHalfDownRounder(), [][]float64{
 		{0.0, 0.0},
 		{1.0, 1.0},
 		{-1.0, -1.0},
@@ -254,7 +287,7 @@ func TestRoundSymmetricHalfDown(t *testing.T) {
 }
 
 func TestRoundHalfEven(t *testing.T) {
-	runTests(t, NewHalfEven(), [][]float64{
+	runTests(t, NewHalfEvenRounder(), [][]float64{
 		{8.0, 8.0},
 		{7.6, 8.0},
 		{7.5, 8.0},
@@ -278,7 +311,7 @@ func TestRoundHalfEven(t *testing.T) {
 }
 
 func TestRoundAlternate(t *testing.T) {
-	runTests(t, NewAlternate(), [][]float64{
+	runTests(t, NewAlternateRounder(), [][]float64{
 		{0.0, 0.0},
 		{0.0, 0.0},
 		{1.0, 1.0},
@@ -297,7 +330,7 @@ func TestRoundAlternate(t *testing.T) {
 }
 
 func TestRoundSymmetricAlternate(t *testing.T) {
-	runTests(t, NewSymmetricAlternate(), [][]float64{
+	runTests(t, NewSymmetricAlternateRounder(), [][]float64{
 		{0.0, 0.0},
 		{0.0, 0.0},
 		{1.0, 1.0},
@@ -316,53 +349,46 @@ func TestRoundSymmetricAlternate(t *testing.T) {
 }
 
 func TestRoundHalfAlternate(t *testing.T) {
-	runTests(t, NewHalfAlternate(), [][]float64{
+	runTests(t, NewHalfAlternateRounder(), [][]float64{
 		{0.0, 0.0},
 	})
 }
 
 func TestRoundSymmetricHalfAlternate(t *testing.T) {
-	runTests(t, NewSymmetricHalfAlternate(), [][]float64{
+	runTests(t, NewSymmetricHalfAlternateRounder(), [][]float64{
 		{0.0, 0.0},
 	})
 }
 
-//RoundHalfEven			 87.50% (7/8)
-
-type MockRandomGenerator struct {
-	Next float64
-}
-
-func (m MockRandomGenerator) Float64() float64 {
-	return m.Next
-}
-
 func TestRoundRandom(t *testing.T) {
-	m := MockRandomGenerator{}
-	runTests(t, NewRandom(0.5, m), [][]float64{
+	m := NewMockRandomGenerator()
+	runTests(t, NewRandomRounder(0.5, m.Float64), [][]float64{
 		{0.0, 0.0},
 	})
 
 	m.Next = 0.6
-	runTests(t, NewRandom(0.5, m), [][]float64{
+	runTests(t, NewRandomRounder(0.5, m.Float64), [][]float64{
 		{0.0, 0.0},
 	})
 }
 
 func TestRoundHalfRandom(t *testing.T) {
-	runTests(t, NewHalfRandom(0.5, MockRandomGenerator{}), [][]float64{
+	m := NewMockRandomGenerator()
+	runTests(t, NewHalfRandomRounder(0.5, m.Float64), [][]float64{
 		{0.0, 0.0},
 	})
 }
 
 func TestRoundSymmetricRandom(t *testing.T) {
-	runTests(t, NewSymmetricRandom(0.5, MockRandomGenerator{}), [][]float64{
+	m := NewMockRandomGenerator()
+	runTests(t, NewSymmetricRandomRounder(0.5, m.Float64), [][]float64{
 		{0.0, 0.0},
 	})
 }
 
 func TestRoundSymmetricHalfRandom(t *testing.T) {
-	runTests(t, NewSymmetricHalfRandom(0.5, MockRandomGenerator{}), [][]float64{
+	m := NewMockRandomGenerator()
+	runTests(t, NewSymmetricHalfRandomRounder(0.5, m.Float64), [][]float64{
 		{0.0, 0.0},
 	})
 }
