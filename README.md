@@ -38,34 +38,34 @@ This allows abstracting away the actual algorithm and settings used.
 ### Create a rounding object
 
 ```golang
-rounder := rounding.NewDownRounder()
-rounder := rounding.NewUpRounder()
-rounder := rounding.NewHalfDownRounder()
-rounder := rounding.NewHalfUpRounder()
-rounder := rounding.NewHalfEvenRounder()
-rounder := rounding.NewSymmetricDownRounder()
-rounder := rounding.NewSymmetricUpRounder()
-rounder := rounding.NewSymmetricHalfDownRounder()
-rounder := rounding.NewSymmetricHalfUpRounder()
-rounder := rounding.NewAlternateRounder()
-rounder := rounding.NewHalfAlternateRounder()
-rounder := rounding.NewSymmetricAlternateRounder()
-rounder := rounding.NewSymmetricHalfAlternateRounder()
-
-// Assuming import "math/rand"
-
+// Assuming "math/rand" has been imported.
+var rounder Rounder
 var midpoint float64 = 0.5
-rounder := rounding.NewRandomRounder(midpoint, rand.Float64)
-rounder := rounding.NewHalfRandomRounder(midpoint, rand.Float64)
-rounder := rounding.NewSymmetricRandomRounder(midpoint, rand.Float64)
-rounder := rounding.NewSymmetricHalfRandomRounder(midpoint, rand.Float64)
+rounder = rounding.NewDownRounder()
+rounder = rounding.NewUpRounder()
+rounder = rounding.NewHalfDownRounder()
+rounder = rounding.NewHalfUpRounder()
+rounder = rounding.NewHalfEvenRounder()
+rounder = rounding.NewSymmetricDownRounder()
+rounder = rounding.NewSymmetricUpRounder()
+rounder = rounding.NewSymmetricHalfDownRounder()
+rounder = rounding.NewSymmetricHalfUpRounder()
+rounder = rounding.NewAlternateRounder()
+rounder = rounding.NewHalfAlternateRounder()
+rounder = rounding.NewSymmetricAlternateRounder()
+rounder = rounding.NewSymmetricHalfAlternateRounder()
+rounder = rounding.NewRandomRounder(midpoint, rand.Float64)
+rounder = rounding.NewHalfRandomRounder(midpoint, rand.Float64)
+rounder = rounding.NewSymmetricRandomRounder(midpoint, rand.Float64)
+rounder = rounding.NewSymmetricHalfRandomRounder(midpoint, rand.Float64)
 ```
 
 ### Use the rounding algorithm
 
 ```golang
+var roundedValue float64
 value := 0.8
-roundedValue := rounder.Round(value)
+roundedValue = rounder.Round(value)
 ```
 
 ## Rounding functions
@@ -73,16 +73,17 @@ roundedValue := rounder.Round(value)
 The first way to use ```rounding``` is to use the actual rounding functions that implement the algorithms directly.
 
 ```golang
+var roundedValue float64
 value := 0.8
-roundedValue := rounding.RoundDown(value)
-roundedValue := rounding.RoundUp(value)
-roundedValue := rounding.RoundHalfUp(value)
-roundedValue := rounding.RoundHalfDown(value)
-roundedValue := rounding.RoundHalfEven(value)
-roundedValue := rounding.RoundSymmetricDown(value)
-roundedValue := rounding.RoundSymmetricUp(value)
-roundedValue := rounding.RoundSymmetricHalfDown(value)
-roundedValue := rounding.RoundSymmetricHalfUp(value)
+roundedValue = rounding.RoundDown(value)
+roundedValue = rounding.RoundUp(value)
+roundedValue = rounding.RoundHalfUp(value)
+roundedValue = rounding.RoundHalfDown(value)
+roundedValue = rounding.RoundHalfEven(value)
+roundedValue = rounding.RoundSymmetricDown(value)
+roundedValue = rounding.RoundSymmetricUp(value)
+roundedValue = rounding.RoundSymmetricHalfDown(value)
+roundedValue = rounding.RoundSymmetricHalfUp(value)
 ```
 
 # Contributing
