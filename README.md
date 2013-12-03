@@ -14,6 +14,10 @@ See also:
 
 * Go 1.1 or higher
 
+# Documentation
+
+[Godoc](http://godoc.org/) documentation is available at [http://godoc.org/github.com/brandscreen/rounding](http://godoc.org/github.com/brandscreen/rounding).
+
 # Installation
 
 ```bash
