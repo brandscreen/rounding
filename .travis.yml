@@ -4,9 +4,9 @@ go:
 - 1.1
 - 1.2
 
-install: cat BUILD_DEPENDENCIES | xargs -I{} go get {}
+install: cat BUILD_DEPENDENCIES | xargs -I{} go get -v {}
 
-script: ../../../../bin/goveralls $GOVERALLS
+script: $HOME/gopath/bin/goveralls $GOVERALLS
 
 env:
   global:
